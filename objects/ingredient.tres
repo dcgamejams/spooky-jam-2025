@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://brbmi43tu22hh"]
+
+[ext_resource type="Texture2D" uid="uid://ir44wgfn3pwr" path="res://assets/models/Prop_Mushroom_Bunny.png" id="1_te2py"]
+
+[resource]
+resource_name = "Bunny"
+shading_mode = 0
+albedo_texture = ExtResource("1_te2py")

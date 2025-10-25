@@ -5,9 +5,12 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tky1x"]
 transparency = 1
 shading_mode = 0
+albedo_color = Color(1, 1, 1, 0)
 
 [sub_resource type="TorusMesh" id="TorusMesh_tky1x"]
 material = SubResource("StandardMaterial3D_tky1x")
+inner_radius = 3.7
+outer_radius = 4.5
 
 [node name="SlamEffect" type="Node3D"]
 script = ExtResource("1_tky1x")

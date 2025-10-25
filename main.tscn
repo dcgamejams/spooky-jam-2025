@@ -1,12 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://bnhbasot1u7g4"]
+[gd_scene load_steps=17 format=3 uid="uid://bnhbasot1u7g4"]
 
 [ext_resource type="Script" uid="uid://5dsj51blu5uv" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://bgkmxyw21pc1m" path="res://PlayerCharacter/PlayerCharacterScene.tscn" id="2_0xm2m"]
+[ext_resource type="FontFile" uid="uid://dewgtcm8moxxi" path="res://assets/ui/font/Ticketing.ttf" id="5_7mycd"]
+[ext_resource type="Texture2D" uid="uid://cvpobf7odjnjk" path="res://assets/ui/keyboard-&-mouse_sheet_default.png" id="6_272bh"]
 [ext_resource type="Script" uid="uid://jka650tksndx" path="res://objects/spawner.gd" id="8_5vw27"]
 [ext_resource type="PackedScene" uid="uid://8oald4y0be2e" path="res://scenes/valtestscene.tscn" id="12_dg77c"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1bvp3"]
-bounce = 0.4
+bounce = 0.5
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_1bvp3"]
 
@@ -22,11 +24,24 @@ size = Vector2(50, 50)
 [sub_resource type="SphereShape3D" id="SphereShape3D_1bvp3"]
 radius = 6.5
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_1bvp3"]
-size = Vector3(4, 5, 1)
+[sub_resource type="Theme" id="Theme_0teac"]
+default_font = ExtResource("5_7mycd")
+default_font_size = 32
 
-[sub_resource type="BoxMesh" id="BoxMesh_lquwl"]
-size = Vector3(4, 5, 1)
+[sub_resource type="AtlasTexture" id="AtlasTexture_mebcp"]
+atlas = ExtResource("6_272bh")
+region = Rect2(321, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0teac"]
+atlas = ExtResource("6_272bh")
+region = Rect2(321, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5qbu3"]
+atlas = ExtResource("6_272bh")
+region = Rect2(449, 64, 64, 64)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7mycd"]
+size = Vector3(3, 5, 1)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_ig7tw")
@@ -44,7 +59,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
 script = ExtResource("8_5vw27")
 
 [node name="Floor" type="StaticBody3D" parent="Game"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2135668, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.967471, 0)
 collision_layer = 147
 collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_1bvp3")
@@ -59,31 +74,130 @@ mesh = SubResource("PlaneMesh_7mycd")
 [node name="CauldronArea" type="Area3D" parent="Game"]
 unique_name_in_owner = true
 collision_layer = 129
+collision_mask = 129
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Game/CauldronArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.6503677, 0)
 shape = SubResource("SphereShape3D_1bvp3")
 
-[node name="Door" type="Area3D" parent="Game"]
+[node name="PlayerUI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="PlayerUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_0teac")
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerUI/Control"]
+layout_mode = 0
+offset_right = 138.0
+offset_bottom = 103.0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerUI/Control/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerUI/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelForItems" type="Label" parent="PlayerUI/Control/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Items Collected: "
+
+[node name="LabelItemCount" type="Label" parent="PlayerUI/Control/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-transform = Transform3D(0.069512725, 0, 0.99758106, 0, 1, 0, -0.99758106, 0, 0.069512725, 20.0083, 4.755803, 0)
-collision_layer = 129
-metadata/_edit_group_ = true
+layout_mode = 2
+text = "0"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Game/Door"]
-shape = SubResource("BoxShape3D_1bvp3")
+[node name="Key2" type="HBoxContainer" parent="PlayerUI/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Game/Door"]
-mesh = SubResource("BoxMesh_lquwl")
+[node name="KeyImage" type="TextureRect" parent="PlayerUI/Control/MarginContainer/VBoxContainer/Key2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_mebcp")
 
-[node name="Door2" type="Area3D" parent="Game"]
+[node name="Label" type="Label" parent="PlayerUI/Control/MarginContainer/VBoxContainer/Key2"]
+layout_mode = 2
+text = "Roll"
+
+[node name="Key3" type="HBoxContainer" parent="PlayerUI/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="KeyImage" type="TextureRect" parent="PlayerUI/Control/MarginContainer/VBoxContainer/Key3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_0teac")
+
+[node name="Label" type="Label" parent="PlayerUI/Control/MarginContainer/VBoxContainer/Key3"]
+layout_mode = 2
+text = "Jump / Slam "
+
+[node name="Key4" type="HBoxContainer" parent="PlayerUI/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="KeyImage" type="TextureRect" parent="PlayerUI/Control/MarginContainer/VBoxContainer/Key4"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_5qbu3")
+
+[node name="Label" type="Label" parent="PlayerUI/Control/MarginContainer/VBoxContainer/Key4"]
+layout_mode = 2
+text = "Aim / Hover??"
+
+[node name="Top" type="MarginContainer" parent="PlayerUI/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerUI/Control/Top"]
+layout_mode = 2
+
+[node name="RequiredList" type="HBoxContainer" parent="PlayerUI/Control/Top/VBoxContainer"]
 unique_name_in_owner = true
-transform = Transform3D(0.069512725, 0, 0.99758106, 0, 1, 0, -0.99758106, 0, 0.069512725, -19.752018, 4.755803, 0)
-collision_layer = 129
-metadata/_edit_group_ = true
+layout_mode = 2
+theme_override_constants/separation = 12
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Game/Door2"]
-shape = SubResource("BoxShape3D_1bvp3")
+[node name="Label" type="Label" parent="PlayerUI/Control/Top/VBoxContainer"]
+layout_mode = 2
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Game/Door2"]
-mesh = SubResource("BoxMesh_lquwl")
+[node name="LabelTimeRemaining" type="Label" parent="PlayerUI/Control/Top/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Center" type="MarginContainer" parent="PlayerUI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LabelStart" type="Label" parent="PlayerUI/Center"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RoundTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.0047647017, 0, 0.9999887, 0, 1, 0, -0.9999887, 0, -0.0047647017, -19.937332, 8.155316, 0)
+mesh = SubResource("BoxMesh_7mycd")

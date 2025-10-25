@@ -1,0 +1,87 @@
+[gd_scene load_steps=5 format=3 uid="uid://coso1pwk8gq8y"]
+
+[ext_resource type="Script" uid="uid://b547fhvc0m2wq" path="res://objects/potion_indicator.gd" id="1_e4jjh"]
+[ext_resource type="Texture2D" uid="uid://cypyjps7p2onk" path="res://assets/ui/mush.png" id="2_5n72n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_twrjr"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5n72n"]
+resource_local_to_scene = true
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.054472983, 0.4079986, 0.0533226, 0.6)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="Control" type="PanelContainer"]
+custom_minimum_size = Vector2(64, 64)
+offset_right = 48.0
+offset_bottom = 48.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_twrjr")
+script = ExtResource("1_e4jjh")
+
+[node name="Control" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Mushroom" type="TextureRect" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("2_5n72n")
+expand_mode = 2
+
+[node name="Panel" type="Panel" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_5n72n")
+
+[node name="Success" type="Label" parent="Control/Panel"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_top = 9.0
+offset_right = 64.0
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 32
+text = "✔"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Failure" type="Label" parent="Control/Panel"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_top = 9.0
+offset_right = 64.0
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 32
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -23,7 +23,6 @@ visible = false
 
 [node name="Prop_EyeballFlower2" parent="." instance=ExtResource("2_ormkd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.954534, 2.1265845, -0.21755695)
-visible = false
 
 [node name="Prop_EyeballFlower" parent="Prop_EyeballFlower2" index="0"]
 transform = Transform3D(0.77497697, 0.41765592, -0.47431457, -0.2668073, 0.8965647, 0.35353345, 0.57290894, -0.14742965, 0.8062505, 11.6411, 0.2819388, 0.42102146)
@@ -31,7 +30,6 @@ material_override = ExtResource("3_sfkmy")
 
 [node name="Prop_Bone2" parent="." instance=ExtResource("4_74sie")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0909534, 0, 2.6310806)
-visible = false
 
 [node name="Prop_Bone" parent="Prop_Bone2" index="0"]
 transform = Transform3D(1.1038742, 0.47286552, 0, -0.41129488, 1.2691236, 0, 0, 0, 1, 0, 0.6091175, 0)
@@ -39,7 +37,6 @@ material_override = ExtResource("5_gnuei")
 
 [node name="Prop_Mushroom2" parent="." instance=ExtResource("6_1uwq8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7718954, 1.5594442, 5.4374475)
-visible = false
 
 [node name="Prop_Mushroom" parent="Prop_Mushroom2" index="0"]
 transform = Transform3D(0.8708623, 0.49152708, 0, -0.49152708, 0.8708623, 0, 0, 0, 1, 0.6068058, 0.47912478, -0.17080927)
@@ -48,7 +45,6 @@ surface_material_override/0 = ExtResource("5_gnuei")
 
 [node name="Prop_Star2" parent="." instance=ExtResource("7_1ang1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6096425, 1.446759, 4.3120975)
-visible = false
 
 [node name="Prop_Star" parent="Prop_Star2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 0.85982555, 0.510588, 0, -0.510588, 0.85982555, 1.1171236, 0, -0.51689434)
@@ -56,7 +52,6 @@ material_override = ExtResource("3_sfkmy")
 
 [node name="Prop_FireJar" parent="." instance=ExtResource("8_jppc4")]
 transform = Transform3D(0.9796209, -0.20085566, 0, 0.20085566, 0.9796209, 0, 0, 0, 1, 1.9652234, 1.7268605, 4.7662544)
-visible = false
 
 [node name="JarGlass" parent="Prop_FireJar" index="0"]
 material_override = ExtResource("9_an363")

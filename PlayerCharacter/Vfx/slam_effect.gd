@@ -18,8 +18,8 @@ func slam():
 	var sasTween: Tween = create_tween()
 	sasTween.set_ease(Tween.EASE_OUT)
 	sasTween.set_parallel(true)
-	sasTween.tween_property(torus, "inner_radius", 3.7, timing).from(0.2)
-	sasTween.tween_property(torus, "outer_radius", 4.5, timing).from(0.7)
+	sasTween.tween_property(torus, "inner_radius", 1.9, timing).from(0.2)
+	sasTween.tween_property(torus, "outer_radius", 2.4, timing).from(0.7)
 	sasTween.tween_callback(fade)
 	
 func fade():

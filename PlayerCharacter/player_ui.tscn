@@ -1,0 +1,89 @@
+[gd_scene load_steps=7 format=3 uid="uid://ys0mkgbt2psb"]
+
+[ext_resource type="FontFile" uid="uid://dewgtcm8moxxi" path="res://assets/ui/font/Ticketing.ttf" id="1_vv45h"]
+[ext_resource type="Texture2D" uid="uid://cvpobf7odjnjk" path="res://assets/ui/keyboard-&-mouse_sheet_default.png" id="2_265lk"]
+
+[sub_resource type="Theme" id="Theme_0teac"]
+default_font = ExtResource("1_vv45h")
+default_font_size = 32
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mebcp"]
+atlas = ExtResource("2_265lk")
+region = Rect2(321, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0teac"]
+atlas = ExtResource("2_265lk")
+region = Rect2(321, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5qbu3"]
+atlas = ExtResource("2_265lk")
+region = Rect2(449, 64, 64, 64)
+
+[node name="PlayerUI" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_0teac")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 0
+offset_right = 138.0
+offset_bottom = 103.0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelForItems" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Items Collected: "
+
+[node name="LabelItemCount" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+
+[node name="Key2" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="KeyImage" type="TextureRect" parent="Control/MarginContainer/VBoxContainer/Key2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_mebcp")
+
+[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer/Key2"]
+layout_mode = 2
+text = "Roll"
+
+[node name="Key3" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="KeyImage" type="TextureRect" parent="Control/MarginContainer/VBoxContainer/Key3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_0teac")
+
+[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer/Key3"]
+layout_mode = 2
+text = "Jump / Slam "
+
+[node name="Key4" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="KeyImage" type="TextureRect" parent="Control/MarginContainer/VBoxContainer/Key4"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_5qbu3")
+
+[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer/Key4"]
+layout_mode = 2
+text = "Aim / Hover??"

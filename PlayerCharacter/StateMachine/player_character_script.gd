@@ -161,7 +161,7 @@ func modify_physics_properties():
 	last_frame_position = position #get play char position every frame
 	last_frame_velocity = velocity #get play char velocity every frame
 	was_on_floor = !is_on_floor() #get if play char is on floor or not
-
+	godot_plush_skin.torus.visible = !is_on_floor()
 	
 func gravity_apply(delta : float):
 	#if play char goes up, apply jump gravity

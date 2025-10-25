@@ -9,6 +9,7 @@ extends Node3D
 @onready var center_col: CollisionShape3D = $"GodotPlushModel/Rig/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone DEF-hips/CollisionShape3D"
 
 @onready var cR: CharacterBody3D = get_parent().get_parent()
+@onready var torus: MeshInstance3D = %TorusIndicator
 
 var ragdoll : bool = false : set = set_ragdoll
 var squash_and_stretch = 1.0 : set = set_squash_and_stretch
@@ -18,6 +19,7 @@ signal footstep(intensity : float)
 func _ready():
 	set_ragdoll(ragdoll)
 	apply_no_weights()
+	%TorusIndicator.top_level = true
 
 func apply_new_weights():
 	for child in %PhysicalBoneSimulator3D.get_children():
@@ -33,7 +35,7 @@ func apply_no_weights():
 		bone.friction  = 0.01
 		bone.get_node('CollisionShape3D').disabled = true
 
-	center_body.mass = 0.08
+	center_body.mass = 0.15
 	center_body.friction = 0.8
 	center_body.get_node('CollisionShape3D').disabled = false
 	
@@ -48,7 +50,7 @@ func apply_no_weights():
 func set_ragdoll(value : bool) -> void:
 	#manage the ragdoll appliements to the model, to call when wanting to go in/out ragdoll mode
 	ragdoll = value
-	%EarBubbles.visible = value
+	#%EarBubbles.visible = value
 	%Bubble.visible = value
 	if !is_inside_tree(): return
 	physical_bone_simulator_3d.active = ragdoll
@@ -117,6 +119,41 @@ func wave():
 func sync_wave():
 	animation_tree["parameters/WaveOneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 
+func line(pos1: Vector3, pos2: Vector3, line_color = Color.WHITE, persist_ms = 1):
+	var mesh_instance := MeshInstance3D.new()
+	var immediate_mesh := ImmediateMesh.new()
+	var material := ORMMaterial3D.new()
+
+	mesh_instance.mesh = immediate_mesh
+	mesh_instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+
+	immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES, material)
+	immediate_mesh.surface_add_vertex(pos1)
+	immediate_mesh.surface_add_vertex(pos2)
+	immediate_mesh.surface_end()
+
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	material.albedo_color = line_color
+
+	return await final_cleanup(mesh_instance, persist_ms)
+	
+func final_cleanup(mesh_instance: MeshInstance3D, persist_ms: float):
+	get_tree().get_root().add_child(mesh_instance)
+	if persist_ms == 1:
+		await get_tree().physics_frame
+		mesh_instance.queue_free()
+	elif persist_ms > 0:
+		await get_tree().create_timer(persist_ms).timeout
+		mesh_instance.queue_free()
+	else:
+		return mesh_instance
+		
+@onready var ray_cast_down = %RayCast3D
+		
+func _process(_delta):
+	if ray_cast_down.is_colliding:
+		line(global_position, ray_cast_down.get_collision_point())
+		%TorusIndicator.position = ray_cast_down.get_collision_point()
 
 #func set_name_tag(username_text: String):
 	#%NametagPlush.text = username_text
